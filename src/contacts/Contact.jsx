@@ -1,5 +1,7 @@
+import { format } from 'date-fns'
 import React, { useContext } from 'react'
 import { FaEye, FaRegTrashAlt } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 import { ContactContext } from '../contextApi/Contact.Context'
 
 const Contact = ({ contact }) => {
@@ -21,11 +23,18 @@ const Contact = ({ contact }) => {
           <h2>Last name: {lastName}</h2>
           <h2>Email: {email}</h2>
           <h2>Profession: {profession}</h2>
-          <h2>Date of Birth: {dateOfBirth}</h2>
+          <h2>
+            Date of Birth:{' '}
+            {dateOfBirth instanceof Object
+              ? format(dateOfBirth, 'dd/MM/yyyy')
+              : dateOfBirth}
+          </h2>
         </div>
-        <button type="button">
-          <FaEye />
-        </button>
+        <Link to={`/contacts/${id}`}>
+          <button type="button">
+            <FaEye />
+          </button>
+        </Link>
         <button type="button" onClick={() => handleDelete(id)}>
           <FaRegTrashAlt />
         </button>

@@ -14,11 +14,11 @@ const Navbar = () => {
             <div className="">
               <div className="flex space-x-4">
                 <Link to="home">Home</Link>
-                <a href="">About</a>
-                <a href="">Add</a>
+                <Link to="edit-contact">Edit</Link>
+                <Link to="add-contact">Add</Link>
                 <Link to="contact">Contact</Link>
-                <a href="">Login</a>
-                <a href="">Registration</a>
+                <Link to='login'>Login</Link>
+                <Link to='registration'>Registration</Link>
               </div>
             </div>
             <div>

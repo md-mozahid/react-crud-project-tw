@@ -1,11 +1,15 @@
 // import { yupResolver } from '@hookform/resolvers/yup'
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 // import * as yup from 'yup'
+import DatePicker from 'react-datepicker'
+import { useNavigate } from 'react-router-dom'
 import Button from '../components/Button'
 import Input from '../components/Input'
+import { ContactContext } from '../contextApi/Contact.Context'
 
-const ContactForm = ({ addContact }) => {
+const ContactForm = ({ foundContact, updateContact }) => {
+  const { addContact } = useContext(ContactContext)
   const {
     register,
     handleSubmit,
@@ -16,28 +20,50 @@ const ContactForm = ({ addContact }) => {
     // resolver: yupResolver(schema),
   })
 
+  const navigate = useNavigate()
+
   // default value
   const defaultValue = {
-    firstName: 'Md',
-    lastName: 'Muzahid',
-    email: 'ce.muzahid@gmail.com',
-    profession: 'Developer',
-    image: 'https://randomuser.me/api/portraits/men/75.jpg',
-    dateOfBirth: '10/10/2020',
+    firstName: foundContact?.firstName || 'Md',
+    lastName: foundContact?.lastName || 'Muzahid',
+    email: foundContact?.email || 'ce.muzahid@gmail.com',
+    profession: foundContact?.profession || 'Developer',
+    image:
+      foundContact?.image || 'https://randomuser.me/api/portraits/men/75.jpg',
+    dateOfBirth:
+      (foundContact?.dateOfBirth && new Date(foundContact.dateOfBirth)) ||
+      new Date(),
   }
-  const { firstName, lastName, email, profession, image } = defaultValue
+  const { firstName, lastName, email, profession, image, dateOfBirth } =
+    defaultValue
+
+  const [birthYear, setBirthYear] = useState(
+    dateOfBirth ? dateOfBirth : new Date()
+  )
+
+  useEffect(() => {
+    setValue('dateOfBirth', birthYear)
+  }, [birthYear])
 
   const onSubmit = (data) => {
-    console.log(data)
-    addContact(data)
+    const id = foundContact?.id
+
+    if (id) {
+      updateContact(data, id)
+    } else {
+      addContact(data)
+    }
+    navigate('/contact')
   }
 
   return (
     <div className="bg-gray-200 w-96 mx-auto">
-      <h1 className="text-4xl">Add Contact</h1>
+      <h1 className="text-4xl">
+        {foundContact?.id ? 'Edit Contact' : 'Add Contact'}
+      </h1>
       <form className="p-4" onSubmit={handleSubmit(onSubmit)}>
         <Input
-          name="First Name"
+          name="firstName"
           placeholder="First name"
           // errors={errors}
           register={register}
@@ -72,9 +98,18 @@ const ContactForm = ({ addContact }) => {
           register={register}
           defaultValue={image}
         />
+        <DatePicker
+          selected={birthYear}
+          name="dateOfBirth"
+          id="dateOfBirth"
+          placeholder="Enter your Date of Birth"
+          maxDate={new Date()}
+          showYearDropdown
+          onChange={(date) => setBirthYear(date)}
+        />
 
         <Button type="submit" className="btn btn-fw">
-          Add contact
+          {foundContact?.id ? 'Update Contact' : 'Add Contact'}
         </Button>
       </form>
     </div>

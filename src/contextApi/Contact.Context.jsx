@@ -17,7 +17,6 @@ export const ContactProvider = ({ children }) => {
 
   // add contact
   const addContact = (contact) => {
-    console.log(contact)
     let contactToAdd = {
       id: uuidv4(),
       ...contact,
@@ -25,10 +24,26 @@ export const ContactProvider = ({ children }) => {
     setContacts([contactToAdd, ...contacts])
   }
 
+  // update contact
+  const updateContact = (updatedContact, id) => {
+    const contactsWithUpdate = contacts.map((contact) => {
+      if (contact.id === id) {
+        return {
+          id,
+          ...updatedContact
+        } 
+      } else {
+          return contact
+        }
+    })
+    setContacts(contactsWithUpdate)
+  }
+
   const value = {
     contacts,
     deleteContact,
     addContact,
+    updateContact
   }
   return (
     <ContactContext.Provider value={value}>{children}</ContactContext.Provider>
