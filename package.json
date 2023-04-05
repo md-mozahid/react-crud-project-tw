@@ -11,14 +11,17 @@
   "dependencies": {
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.16",
+    "@hookform/resolvers": "^3.0.0",
     "eslint-plugin-react": "^7.32.2",
     "react": "^18.2.0",
     "react-datepicker": "^4.10.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
     "react-router-dom": "6",
     "react-toastify": "^9.1.2",
-    "uuidv4": "^6.2.13"
+    "uuidv4": "^6.2.13",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

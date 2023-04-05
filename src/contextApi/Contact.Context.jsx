@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react'
-import { UserData } from '../components/userData/UserData'
+import { v4 as uuidv4 } from 'uuid'
+import { UserData } from '../userData/UserData'
 
 // create context
 export const ContactContext = createContext()
@@ -8,24 +9,26 @@ export const ContactContext = createContext()
 export const ContactProvider = ({ children }) => {
   const [contacts, setContacts] = useState(UserData)
 
+  // delete contact
+  const deleteContact = (id) => {
+    const filteredContact = contacts.filter((contact) => contact.id !== id)
+    setContacts(filteredContact)
+  }
+
   // add contact
   const addContact = (contact) => {
+    console.log(contact)
     let contactToAdd = {
       id: uuidv4(),
       ...contact,
     }
     setContacts([contactToAdd, ...contacts])
-
-    toast.success('Contact add successfully !', {
-      autoClose: 1000,
-      hideProgressBar: true,
-      theme: 'colored',
-    })
   }
 
   const value = {
     contacts,
-    value: 10,
+    deleteContact,
+    addContact,
   }
   return (
     <ContactContext.Provider value={value}>{children}</ContactContext.Provider>

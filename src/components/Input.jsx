@@ -1,11 +1,23 @@
-export default function Input({ type, id, name, value, placeholder, ...rest }) {
+export default function Input({
+  type,
+  id,
+  name,
+  error,
+  register,
+  defaultValue,
+  value,
+  placeholder,
+  errors,
+  ...rest
+}) {
   return (
     <input
       className="inputVal"
-      type={type === 'password' ? 'password' : 'text'}
       name={name}
-      id={id}
-      value={value}
+      type={type === 'password' ? 'password' : 'text'}
+      defaultValue={defaultValue}
+      {...register(name)}
+      errors={errors}
       placeholder={placeholder}
       {...rest}
     />
