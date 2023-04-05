@@ -2,6 +2,7 @@ import { format } from 'date-fns'
 import React, { useContext } from 'react'
 import { FaEye, FaRegTrashAlt } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { ContactContext } from '../contextApi/Contact.Context'
 
 const Contact = ({ contact }) => {
@@ -11,6 +12,11 @@ const Contact = ({ contact }) => {
 
   const handleDelete = (id) => {
     deleteContact(id)
+    toast.success('Delete successfully !', {
+      autoClose: 2000,
+      hideProgressBar: true,
+      theme: 'colored',
+    })
   }
   return (
     <div className="bg-gray-200 max-w-2xl mx-auto">

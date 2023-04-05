@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <>
       <div className="bg-gray-700 text-white ">
-        <div className="h-12 mx-auto max-w-7xl px-2">
+        <div className=" h-auto mx-auto max-w-7xl px-3 py-3 text-base ">
           <nav className="flex items-center justify-between">
             <div className="">
               <img className="block h-8 w-auto" src={Logo} alt="Logo" />
@@ -17,12 +17,11 @@ const Navbar = () => {
                 <Link to="edit-contact">Edit</Link>
                 <Link to="add-contact">Add</Link>
                 <Link to="contact">Contact</Link>
-                <Link to='login'>Login</Link>
-                <Link to='registration'>Registration</Link>
+                <Link to="registration">Registration</Link>
               </div>
             </div>
             <div>
-              <img className="h-5 w-auto" src={Logo} alt="" />
+              <Link to="login">Login</Link>
             </div>
           </nav>
         </div>

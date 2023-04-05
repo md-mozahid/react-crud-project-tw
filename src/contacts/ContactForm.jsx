@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import Button from '../components/Button'
 import Input from '../components/Input'
 import { ContactContext } from '../contextApi/Contact.Context'
+import { toast } from 'react-toastify'
 
 const ContactForm = ({ foundContact, updateContact }) => {
   const { addContact } = useContext(ContactContext)
@@ -50,8 +51,18 @@ const ContactForm = ({ foundContact, updateContact }) => {
 
     if (id) {
       updateContact(data, id)
+      toast.success('Updated successfully !', {
+        autoClose: 2000,
+        hideProgressBar: true,
+        theme: 'colored',
+      })
     } else {
       addContact(data)
+      toast.success('Added successfully !', {
+        autoClose: 2000,
+        hideProgressBar: true,
+        theme: 'colored',
+      })
     }
     navigate('/contact')
   }

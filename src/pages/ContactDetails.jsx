@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FaPencilAlt, FaRegTrashAlt } from 'react-icons/fa'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { ContactContext } from '../contextApi/Contact.Context'
 
 const ContactDetails = () => {
@@ -21,6 +22,12 @@ const ContactDetails = () => {
 
   const handleDelete = (id) => {
     deleteContact(id)
+    toast.success('Delete successfully !', {
+      autoClose: 2000,
+      hideProgressBar: true,
+      theme: 'colored',
+    })
+
     navigate('/contact')
   }
   return (

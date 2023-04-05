@@ -9,6 +9,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import NotFound from './pages/NotFound'
 import Registration from './pages/Registration'
+ import { ToastContainer, toast } from 'react-toastify'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="registration" element={<Registration />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <ToastContainer />
       </BrowserRouter>
     </>
   )
